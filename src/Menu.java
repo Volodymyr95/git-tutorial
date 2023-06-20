@@ -1,3 +1,8 @@
+import keys.Key;
+import keys.MoveOn3PointsKey;
+import keys.MoveOn4PointsKey;
+import keys.MoveOn5PointsKey;
+
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -8,10 +13,17 @@ public class Menu {
     private static final int ENCODE_FILE = 2;
     private static final String MENU_INFO =
             """
-                    1: Encode
-                    2: Decode
-                    0: Exit
+                    1. Encode
+                    2. Decode
+                    0. Exit
                                      
+                    """;
+
+    private static final String OPTIONS_FOR_CRYPT =
+            """
+                    1. Move letter on 3 points
+                    2. Move letter on 5 points
+                    3. Move letter on 4 points
                     """;
     private static boolean isRunning = true;
 
@@ -31,9 +43,22 @@ public class Menu {
             }
         }
     }
+
     private void itemToEncodeFile() {
-        ceaserCypher.encode(validateFilePath());
+        System.out.println(OPTIONS_FOR_CRYPT);
+        var encodingScanner = new Scanner(System.in);
+        int input = encodingScanner.nextInt();
+
+        Key key = switch (input) {
+            case 1 ->  new MoveOn3PointsKey();
+            case 2 -> new MoveOn5PointsKey();
+            case 3 -> new MoveOn4PointsKey();
+            default -> null;
+        };
+
+        ceaserCypher.encode(validateFilePath(), key);
     }
+
     private void itemToDecodeFile() {
         ceaserCypher.decode(validateFilePath());
     }
