@@ -1,4 +1,6 @@
-import keys.Key;
+package api;
+
+import api.keys.Key;
 
 import java.io.File;
 
