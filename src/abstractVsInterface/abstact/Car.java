@@ -7,7 +7,6 @@ public abstract class Car {
 
     public Car() {
     }
-
     public Car(String name, int year, int maxSpeed) {
         this.name = name;
         this.year = year;
